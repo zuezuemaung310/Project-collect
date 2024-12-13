@@ -1,0 +1,179 @@
+body {
+    background-color: white;
+    color: black;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+body.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+body.dark-mode .title {
+    color: black;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color:black;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+@keyframes fillBar {
+    from {
+      width: 0;
+    }
+    to {
+        width: var(--target-width);
+    }
+  }
+.progress-bar {
+    animation: fillBar 8s ease-in-out forwards;
+    width: 0; 
+}
+/* Pop-in animation */
+@keyframes popIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.project-item {
+    animation: popIn 10s ease forwards; /* Trigger animation */
+    opacity: 0; /* Ensure it's hidden initially */
+}
+
+/* Delay animation for each card */
+.project-item:nth-child(1) { animation-delay: 1s; }
+.project-item:nth-child(2) { animation-delay: 1s; }
+.project-item:nth-child(3) { animation-delay: 1s; }
+
+
+/* Animation for sliding in from the right */
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%); /* Start off the screen to the right */
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0); /* Move to its final position */
+        opacity: 1;
+    }
+}
+
+/* Animation for sliding in from the left */
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%); /* Start off the screen to the left */
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0); /* Move to its final position */
+        opacity: 1;
+    }
+}
+
+/* Apply the animation to the image */
+.image-slide-in {
+    animation: slideInFromRight 2s ease-out forwards;
+}
+
+/* Apply the animation to the text */
+.text-slide-in {
+    animation: slideInFromLeft 2s ease-out forwards;
+    animation-delay: 0.5s; /* Delay the text animation slightly */
+}
+
+/* Container for the image */
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Image styling */
+.image-container img {
+    width: 100%;
+    height: 250px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* The overlay div that will appear on hover */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    color: white;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Hover effect for the image container */
+.image-container:hover .overlay {
+    opacity: 1; /* Show the overlay when the image is hovered */
+}
+
+/* Optional: Scale the image slightly on hover */
+.image-container:hover img {
+    transform: scale(1.05); /* Slight zoom effect */
+}
